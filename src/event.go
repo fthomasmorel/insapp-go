@@ -123,6 +123,17 @@ func AddParticipant(id bson.ObjectId, userID bson.ObjectId) (Event, User) {
 	return event, user
 }
 
+func SearchEvent(name string) Events {
+	session, _ := mgo.Dial("127.0.0.1")
+	defer session.Close()
+	session.SetMode(mgo.Monotonic, true)
+	db := session.DB("insapp").C("event")
+	var result Events
+	db.Find(bson.M{"$or" : []interface{}{
+		bson.M{"name" : bson.M{ "$regex" : bson.RegEx{`^.*` + name + `.*`, "i"}}}, bson.M{"description" : bson.M{ "$regex" : bson.RegEx{`^.*` + name + `.*`, "i"}}}}}).All(&result)
+	return result
+}
+
 // RemoveParticipant remove the given userID from the given eventID as a participant
 func RemoveParticipant(id bson.ObjectId, userID bson.ObjectId) (Event, User) {
 	session, _ := mgo.Dial("127.0.0.1")

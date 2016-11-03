@@ -194,14 +194,14 @@ func RemoveEventFromUser(id bson.ObjectId, eventID bson.ObjectId) User {
 	return result
 }
 
-func SearchUser(username string) Users {
+func SearchUser(name string) Users {
 	session, _ := mgo.Dial("127.0.0.1")
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("user")
 	var result Users
 	db.Find(bson.M{"$or" : []interface{}{
-		bson.M{"username" : bson.M{ "$regex" : bson.RegEx{`^.*` + username + `.*`, "i"}}}, bson.M{"name" : bson.M{ "$regex" : bson.RegEx{`^.*` + username + `.*`, "i"}}}}}).All(&result)
+		bson.M{"username" : bson.M{ "$regex" : bson.RegEx{`^.*` + name + `.*`, "i"}}}, bson.M{"name" : bson.M{ "$regex" : bson.RegEx{`^.*` + name + `.*`, "i"}}}}}).All(&result)
 	return result
 }
 

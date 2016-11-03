@@ -124,6 +124,18 @@ func GetMyAssociations(id bson.ObjectId) []bson.ObjectId {
 	return res
 }
 
+
+func SearchAssociation(name string) Associations {
+	session, _ := mgo.Dial("127.0.0.1")
+	defer session.Close()
+	session.SetMode(mgo.Monotonic, true)
+	db := session.DB("insapp").C("association")
+	var result Associations
+	db.Find(bson.M{"$or" : []interface{}{
+		bson.M{"name" : bson.M{ "$regex" : bson.RegEx{`^.*` + name + `.*`, "i"}}}, bson.M{"description" : bson.M{ "$regex" : bson.RegEx{`^.*` + name + `.*`, "i"}}}}}).All(&result)
+	return result
+}
+
 // AddEventToAssociation will add the given event ID to the given association
 func AddEventToAssociation(id bson.ObjectId, event bson.ObjectId) Association {
 	session, _ := mgo.Dial("127.0.0.1")
