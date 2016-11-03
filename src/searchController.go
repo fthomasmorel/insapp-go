@@ -34,9 +34,9 @@ func SearchAssociationController(w http.ResponseWriter, r *http.Request) {
 
 func SearchUniversalController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-  users := SearchUser(vars["name"])
-  posts := SearchPost(vars["name"])
-  events := SearchEvent(vars["name"])
-	assos := SearchPost(vars["name"])
+  users := SearchUser(vars["name"])[0:6]
+  posts := SearchPost(vars["name"])[0:6]
+  events := SearchEvent(vars["name"])[0:6]
+	assos := SearchAssociation(vars["name"])[0:6]
 	json.NewEncoder(w).Encode(bson.M{"associations": assos, "users": users, "posts": posts, "events": events})
 }
