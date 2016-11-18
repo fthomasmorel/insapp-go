@@ -1,0 +1,38 @@
+consumes:
+- application/json
+definitions:
+  item:
+    type: object
+    required:
+      - description
+    properties:
+      id:
+        type: integer
+        format: int64
+        readOnly: true
+      description:
+        type: string
+        minLength: 1
+      completed:
+        type: boolean
+info:
+  description: Insapp backend part written in golang
+  title: Insapp
+  version: 1.0.0
+paths:
+  /:
+    get:
+      tags:
+        - todos
+      responses:
+        200:
+          description: list the todo operations
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/item"
+produces:
+- application/json
+schemes:
+- http
+swagger: "2.0"
