@@ -9,8 +9,16 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// GetUserController will answer a JSON of the user
-// linked to the given id in the URL
+
+// @Title GetUserController
+// @Description Return the user associated with the given id in the URL
+// @Accept  json
+// @Param   id     path    int     true        "User ID"
+// @Success 200 {object} User
+// @Failure 403 {object} error  "Forbidden access"
+// @Failure 406 {object} error    "Request not accepted"
+// @Resource /user
+// @Router /user/{id} [get]
 func GetUserController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	userID := vars["id"]
@@ -35,6 +43,17 @@ func AddUserController(w http.ResponseWriter, r *http.Request) {
 
 // UpdateUserController will answer the JSON of the
 // modified user (from the JSON Body)
+
+// @Title UpdateUserController
+// @Description Update the user from the JSON body and return the modified user
+// @Accept  json
+// @Param   id 	     path    int     true        "id of the user to update"
+// @Param   user     body    User     true        "Modification to give to the user"
+// @Success 200 {object} User
+// @Failure 403 {object} error  "Forbidden access"
+// @Failure 406 {object} error    "Request not accepted"
+// @Resource /user
+// @Router /user/{id} [put]
 func UpdateUserController(w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
 	var user User
@@ -54,6 +73,7 @@ func UpdateUserController(w http.ResponseWriter, r *http.Request) {
 
 // DeleteUserController will answer a JSON of an
 // empty user if the deletion has succeed
+// TODO : swagger
 func DeleteUserController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	userID := vars["id"]
@@ -69,12 +89,14 @@ func DeleteUserController(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(res)
 }
 
+// TODO : swagger
 func SearchUserController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	users := SearchUser(vars["username"])
 	json.NewEncoder(w).Encode(bson.M{"users": users})
 }
 
+// TODO : swagger
 func ReportUserController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	userID := vars["id"]

@@ -17,28 +17,16 @@ var genders = []string{"", "female", "male"}
 
 
 // User represents the user for this application
-//
-// swagger:parameters UpdateUser
 type User struct {
-	// id for the user
 	ID          bson.ObjectId   `bson:"_id,omitempty"`
-	// name of the user
 	Name        string          `json:"name"`
-	// username for the user
 	Username    string          `json:"username"`
-	// description of the user
 	Description string          `json:"description"`
-	// email of the user
 	Email       string          `json:"email"`
-	// email for the user
 	EmailPublic bool            `json:"emailpublic"`
-	// promotion of the user
 	Promotion   string          `json:"promotion"`
-	// gender the user
 	Gender 	 		string					`json:"gender"`
-	// events in which the user takes part
 	Events      []bson.ObjectId `json:"events"`
-	// posts that the user likes
 	PostsLiked  []bson.ObjectId `json:"postsliked"`
 }
 

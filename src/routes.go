@@ -178,22 +178,7 @@ var userRoutes = Routes{
 
 
 	// USER
-	// swagger:route GET /user/{id} GetUser
-	    // Return the user associated with the given id in the URL
-	    //     Responses:
-	    //       default: Unknown
-	    //       200: User
-			//	     403: 403
-	    //       406: 406
 	Route{"GetUser", "GET", "/user/{id}", GetUserController},
-
-	// swagger:route PUT /user/{id} UpdateUser
-	    // Update the user from the JSON body and return the modified user
-	    //     Responses:
-	    //       default: Unknown
-	    //       200: User
-			//	     403: 403
-	    //       406: 406
 	Route{"UpdateUser", "PUT", "/user/{id}", UpdateUserController},
 
 	// swagger:route DELETE /user/{id} DeleteUser
