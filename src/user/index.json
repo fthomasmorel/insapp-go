@@ -101,6 +101,47 @@
                             "responseModel": "error"
                         }
                     ]
+                },
+                {
+                    "httpMethod": "DELETE",
+                    "nickname": "DeleteUserController",
+                    "type": "github.com.juliettegonzalez.insapp-go.src.User",
+                    "items": {},
+                    "summary": "Delete the given user and answer an empty user if success",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "description": "id of the user to delete",
+                            "dataType": "int",
+                            "type": "int",
+                            "format": "",
+                            "allowMultiple": false,
+                            "required": true,
+                            "minimum": 0,
+                            "maximum": 0
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "Return empty User when success",
+                            "responseType": "object",
+                            "responseModel": "github.com.juliettegonzalez.insapp-go.src.User"
+                        },
+                        {
+                            "code": 403,
+                            "message": "Forbidden access",
+                            "responseType": "object",
+                            "responseModel": "error"
+                        },
+                        {
+                            "code": 406,
+                            "message": "Request not accepted",
+                            "responseType": "object",
+                            "responseModel": "error"
+                        }
+                    ]
                 }
             ]
         }

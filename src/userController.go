@@ -41,9 +41,6 @@ func AddUserController(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(res)
 }
 
-// UpdateUserController will answer the JSON of the
-// modified user (from the JSON Body)
-
 // @Title UpdateUserController
 // @Description Update the user from the JSON body and return the modified user
 // @Accept  json
@@ -71,9 +68,19 @@ func UpdateUserController(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(res)
 }
 
+
 // DeleteUserController will answer a JSON of an
 // empty user if the deletion has succeed
-// TODO : swagger
+
+// @Title DeleteUserController
+// @Description Delete the given user and answer an empty user if success
+// @Accept  json
+// @Param   id 	     path    int     true        "id of the user to delete"
+// @Success 200 {object} User			"Return empty User when success"
+// @Failure 403 {object} error  	"Forbidden access"
+// @Failure 406 {object} error    "Request not accepted"
+// @Resource /user
+// @Router /user/{id} [delete]
 func DeleteUserController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	userID := vars["id"]
@@ -89,14 +96,30 @@ func DeleteUserController(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(res)
 }
 
-// TODO : swagger
+// @Title SearchUserController
+// @Description Return the user(s) matching the entry (username)
+// @Accept  json
+// @Param   username 	   path    string     true        "username of the user to look for"
+// @Success 200 {array}  User			"Return the list of User matching"
+// @Failure 403 {object} error  	"Forbidden access"
+// @Failure 406 {object} error    "Request not accepted"
+// @Resource /search
+// @Router /search/users/{username} [get]
 func SearchUserController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	users := SearchUser(vars["username"])
 	json.NewEncoder(w).Encode(bson.M{"users": users})
 }
 
-// TODO : swagger
+// @Title ReportUserController
+// @Description Report a user. Return empty JSON
+// @Accept  json
+// @Param   id 	 			    path    int     true        "if of the user to report"
+// @Success 200 {object}  bson.M		"Empty JSON"
+// @Failure 403 {object}  error   	"Forbidden access"
+// @Failure 406 {object}  error     "Request not accepted"
+// @Resource /report
+// @Router /report/user/{id} [put]
 func ReportUserController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	userID := vars["id"]

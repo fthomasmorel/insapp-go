@@ -14,6 +14,7 @@ import (
 
 // GetPostController will answer a JSON of the post
 // linked to the given id in the URL
+// TODO : swagger
 func GetPostController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	postID := vars["id"]
@@ -23,6 +24,7 @@ func GetPostController(w http.ResponseWriter, r *http.Request) {
 
 // GetLastestPostsController will answer a JSON of the
 // N lastest post. Here N = 50.
+// TODO : swagger
 func GetLastestPostsController(w http.ResponseWriter, r *http.Request) {
 	var res = GetLastestPosts(50)
 	json.NewEncoder(w).Encode(res)
@@ -88,6 +90,7 @@ func DeletePostController(w http.ResponseWriter, r *http.Request) {
 
 // LikePostController will answer a JSON of the
 // post and the user that liked the post
+// TODO : swagger
 func LikePostController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	postID := vars["id"]
@@ -104,6 +107,7 @@ func LikePostController(w http.ResponseWriter, r *http.Request) {
 
 // DislikePostController will answer a JSON of the
 // post and the user that disliked the post
+// TODO : swagger
 func DislikePostController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	postID := vars["id"]
@@ -119,6 +123,7 @@ func DislikePostController(w http.ResponseWriter, r *http.Request) {
 }
 
 // CommentPostController will answer a JSON of the post
+// TODO : swagger
 func CommentPostController(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -152,6 +157,7 @@ func CommentPostController(w http.ResponseWriter, r *http.Request) {
 }
 
 // UncommentPostController will answer a JSON of the post
+// TODO : swagger
 func UncommentPostController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	postID := vars["id"]
@@ -174,6 +180,7 @@ func UncommentPostController(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(res)
 }
 
+// TODO : swagger
 func ReportCommentController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	postID := vars["id"]

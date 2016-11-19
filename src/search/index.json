@@ -1,0 +1,132 @@
+{
+    "apiVersion": "1.0.0",
+    "swaggerVersion": "1.2",
+    "basePath": "http://host:port/api/",
+    "resourcePath": "/search",
+    "apis": [
+        {
+            "path": "/search/users/{username}",
+            "description": "Return the user(s) matching the entry (username)",
+            "operations": [
+                {
+                    "httpMethod": "GET",
+                    "nickname": "SearchUserController",
+                    "type": "array",
+                    "items": {
+                        "$ref": "github.com.juliettegonzalez.insapp-go.src.User"
+                    },
+                    "summary": "Return the user(s) matching the entry (username)",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "username",
+                            "description": "username of the user to look for",
+                            "dataType": "string",
+                            "type": "string",
+                            "format": "",
+                            "allowMultiple": false,
+                            "required": true,
+                            "minimum": 0,
+                            "maximum": 0
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "Return the list of User matching",
+                            "responseType": "array",
+                            "responseModel": "github.com.juliettegonzalez.insapp-go.src.User"
+                        },
+                        {
+                            "code": 403,
+                            "message": "Forbidden access",
+                            "responseType": "object",
+                            "responseModel": "error"
+                        },
+                        {
+                            "code": 406,
+                            "message": "Request not accepted",
+                            "responseType": "object",
+                            "responseModel": "error"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "models": {
+        "github.com.juliettegonzalez.insapp-go.src.User": {
+            "id": "github.com.juliettegonzalez.insapp-go.src.User",
+            "properties": {
+                "ID": {
+                    "type": "gopkg.in.mgo.v2.bson.ObjectId",
+                    "description": "",
+                    "items": {},
+                    "format": ""
+                },
+                "description": {
+                    "type": "string",
+                    "description": "",
+                    "items": {},
+                    "format": ""
+                },
+                "email": {
+                    "type": "string",
+                    "description": "",
+                    "items": {},
+                    "format": ""
+                },
+                "emailpublic": {
+                    "type": "bool",
+                    "description": "",
+                    "items": {},
+                    "format": ""
+                },
+                "events": {
+                    "type": "array",
+                    "description": "",
+                    "items": {
+                        "$ref": "gopkg.in.mgo.v2.bson.ObjectId"
+                    },
+                    "format": ""
+                },
+                "gender": {
+                    "type": "string",
+                    "description": "",
+                    "items": {},
+                    "format": ""
+                },
+                "name": {
+                    "type": "string",
+                    "description": "",
+                    "items": {},
+                    "format": ""
+                },
+                "postsliked": {
+                    "type": "array",
+                    "description": "",
+                    "items": {
+                        "$ref": "gopkg.in.mgo.v2.bson.ObjectId"
+                    },
+                    "format": ""
+                },
+                "promotion": {
+                    "type": "string",
+                    "description": "",
+                    "items": {},
+                    "format": ""
+                },
+                "username": {
+                    "type": "string",
+                    "description": "",
+                    "items": {},
+                    "format": ""
+                }
+            }
+        },
+        "gopkg.in.mgo.v2.bson.ObjectId": {
+            "id": "gopkg.in.mgo.v2.bson.ObjectId",
+            "properties": null
+        }
+    }
+}

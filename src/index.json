@@ -6,6 +6,14 @@
         {
             "path": "/user",
             "description": "Return the user associated with the given id in the URL"
+        },
+        {
+            "path": "/search",
+            "description": "Return the user(s) matching the entry (username)"
+        },
+        {
+            "path": "/report",
+            "description": "Report a user. Return empty JSON"
         }
     ],
     "info": {

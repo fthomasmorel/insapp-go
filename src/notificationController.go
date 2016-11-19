@@ -10,6 +10,7 @@ import (
 
 // AddUserController will answer a JSON of the
 // brand new created user (from the JSON Body)
+// TODO : swagger
 func UpdateNotificationUserController(w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
 	var user NotificationUser
@@ -24,6 +25,7 @@ func UpdateNotificationUserController(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(bson.M{"status": "ok"})
 }
 
+// TODO : swagger
 func GetNotificationController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	userID := vars["userID"]
@@ -37,6 +39,7 @@ func GetNotificationController(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(bson.M{"notifications": res})
 }
 
+// TODO : swagger
 func DeleteNotificationController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	userID := vars["userID"]

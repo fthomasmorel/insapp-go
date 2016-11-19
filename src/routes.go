@@ -180,32 +180,8 @@ var userRoutes = Routes{
 	// USER
 	Route{"GetUser", "GET", "/user/{id}", GetUserController},
 	Route{"UpdateUser", "PUT", "/user/{id}", UpdateUserController},
-
-	// swagger:route DELETE /user/{id} DeleteUser
-	    // Delete the given user and answer an empty user if success
-	    //     Responses:
-	    //       default: Unknown
-	    //       200: 200
-			//	     403: 403
-	    //       406: 406
 	Route{"DeleteUser", "DELETE", "/user/{id}", DeleteUserController},
-
-	// swagger:route PUT /search/users/{username} SearchUser
-	    // Return the user(s) matching the entry (username)
-	    //     Responses:
-	    //       default: Unknown
-	    //       200: 200
-			//	     403: 403
-	    //       406: 406
 	Route{"SearchUser", "GET", "/search/users/{username}", SearchUserController},
-
-	// swagger:route PUT /report/user/{id} ReportUser
-	    // Report a user. Return empty JSON
-	    //     Responses:
-	    //       default: Unknown
-	    //       200: Empty
-			//	     403: 403
-	    //       406: 406
 	Route{"ReportUser", "PUT", "/report/user/{id}", ReportUserController},
 
 	//NOTIFICATION

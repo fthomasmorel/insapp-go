@@ -18,6 +18,7 @@ func GetMyAssociationController(w http.ResponseWriter, r *http.Request) {
 
 // GetAssociationController will answer a JSON of the association
 // linked to the given id in the URL
+// TODO : swagger
 func GetAssociationController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	assocationID := vars["id"]
@@ -26,6 +27,7 @@ func GetAssociationController(w http.ResponseWriter, r *http.Request) {
 }
 
 // GetAllAssociationsController will answer a JSON of all associations
+// TODO : swagger
 func GetAllAssociationsController(w http.ResponseWriter, r *http.Request) {
 	var res = GetAllAssociation()
 	json.NewEncoder(w).Encode(res)

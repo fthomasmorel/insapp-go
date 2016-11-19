@@ -12,6 +12,7 @@ import (
 
 // GetEventController will answer a JSON of the event
 // from the given "id" in the URL. (cf Routes in routes.go)
+// TODO : swagger
 func GetEventController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	assocationID := vars["id"]
@@ -21,6 +22,7 @@ func GetEventController(w http.ResponseWriter, r *http.Request) {
 
 // GetFutureEventsController will answer a JSON
 // containing all future events from "NOW"
+// TODO : swagger
 func GetFutureEventsController(w http.ResponseWriter, r *http.Request) {
 	var res = GetFutureEvents()
 	json.NewEncoder(w).Encode(res)
@@ -85,6 +87,7 @@ func DeleteEventController(w http.ResponseWriter, r *http.Request) {
 
 // AddParticipantController will answer the JSON
 // of the event with the given partipant added
+// TODO : swagger
 func AddParticipantController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	eventID := bson.ObjectIdHex(vars["id"])
@@ -101,6 +104,7 @@ func AddParticipantController(w http.ResponseWriter, r *http.Request) {
 
 // RemoveParticipantController will answer the JSON
 // of the event without the given partipant added
+// TODO : swagger
 func RemoveParticipantController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	eventID := bson.ObjectIdHex(vars["id"])
