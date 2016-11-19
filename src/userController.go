@@ -53,7 +53,7 @@ func UpdateUserController(w http.ResponseWriter, r *http.Request) {
 }
 
 // DeleteUserController will answer a JSON of an
-// empty user if the deletation has succeed
+// empty user if the deletion has succeed
 func DeleteUserController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	userID := vars["id"]

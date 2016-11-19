@@ -5,23 +5,50 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-// Association defines the model of a Association
+// Association represents the model of an Association
+//
+// swagger:model
 type Association struct {
+	// id for the association
+  // required: true
 	ID          bson.ObjectId   `bson:"_id,omitempty"`
+	// name for the association
+  // required: true
 	Name        string          `json:"name"`
+	// email for the association
+	// required: true
 	Email       string          `json:"email"`
+	// description for the association
+	// required: true
 	Description string          `json:"description"`
+	// events for the association
+	// required: true
 	Events      []bson.ObjectId `json:"events"`
+	// posts for the association
+	// required: true
 	Posts       []bson.ObjectId `json:"posts"`
+	// palette of colors to be chosen for the association
+	// required: true
 	Palette			[][]int					`json:"palette"`
+	// selectedcolor for the association
+	// required: true
 	SelectedColor int						`json:"selectedcolor"`
+	// profile picture for the association
+	// required: true
 	Profile    	string          `json:"profile"`
+	// cover picture for the association
+	// required: true
 	Cover	    	string          `json:"cover"`
+	// Background color for the association
+	// required: true
 	BgColor     string          `json:"bgcolor"`
+	// Foreground for the association
+	// required: true
 	FgColor     string          `json:"fgcolor"`
 }
 
 // Associations is an array of Association
+// swagger:model
 type Associations []Association
 
 func AddAssociationUser(user AssociationUser) {

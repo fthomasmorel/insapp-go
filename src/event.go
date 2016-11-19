@@ -7,20 +7,47 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-// Event defines what an Event is
+// Event represents the model of an event
+// swagger:model Event
 type Event struct {
+	// id for the event
+  // required: true
 	ID           	bson.ObjectId   `bson:"_id,omitempty"`
+	// name for the event
+  // required: true
 	Name         	string          `json:"name"`
+	// association for the event
+  // required: true
 	Association  	bson.ObjectId   `json:"association" bson:"association"`
+	// description for the event
+  // required: true
 	Description  	string          `json:"description"`
+	// participants for the event
+  // required: true
 	Participants 	[]bson.ObjectId `json:"participants" bson:"participants,omitempty"`
+	// status for the event
+  // required: true
 	Status       	string          `json:"status"`
+	// palette for the event
+  // required: true
 	Palette			 	[][]int				 	`json:"palette"`
+	// selectedcolor for the event
+  // required: true
 	SelectedColor int						 	`json:"selectedcolor"`
+	// Start date of the event
+  // required: true
 	DateStart    	time.Time       `json:"dateStart"`
+	// End date of the event
+  // required: true
 	DateEnd      	time.Time       `json:"dateEnd"`
+	// Image for the event
+  // required: true
 	Image     	 	string          `json:"image"`
+	// Background color of the event
+  // required: true
 	BgColor      	string          `json:"bgColor"`
+	// Foreground color of the event
+  // required: true
 	FgColor      	string          `json:"fgColor"`
 }
 

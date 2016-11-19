@@ -105,16 +105,69 @@ var associationRoutes = Routes{
 
 var userRoutes = Routes{
 	//ASSOCIATIONS
-	Route{"GetAssociation", "GET", "/association", GetAllAssociationsController},
+	// swagger:route GET /association GetAllAssociation
+	    // Get all the associations.
+	    //     Responses:
+	    //       default: Unknown
+	    //       200: Associations
+			//	     403: 403
+	    //       406: 406
+	Route{"GetAllAssociation", "GET", "/association", GetAllAssociationsController},
+	// swagger:route GET /association/{id} GetAssociation
+	    // Get the associations associated to the given id.
+	    //     Responses:
+	    //       default: Unknown
+	    //       200: Association
+			//	     403: 403
+	    //       406: 406
 	Route{"GetAssociation", "GET", "/association/{id}", GetAssociationController},
 
+
 	//EVENTS
+	// swagger:route GET /event GetFutureEvents
+	    // Get the upcoming events
+	    //     Responses:
+	    //       default: Unknown
+	    //       200: Events
+			//	     403: 403
+	    //       406: 406
 	Route{"GetFutureEvents", "GET", "/event", GetFutureEventsController},
+	// swagger:route GET /event/{id} GetEvent
+	    // Get the event matching the given id
+	    //     Responses:
+	    //       default: Unknown
+	    //       200: Event
+			//	     403: 403
+	    //       406: 406
 	Route{"GetEvent", "GET", "/event/{id}", GetEventController},
+	// swagger:route POST /event/{id}/participant/{userID} AddParticipant
+	    // Add the participant userID to this event id
+	    //     Responses:
+	    //       default: Unknown
+							//TODO: trouver autre chose : struct?
+	    //       200: EventUser
+			//	     403: 403
+	    //       406: 406
 	Route{"AddParticipant", "POST", "/event/{id}/participant/{userID}", AddParticipantController},
+	// swagger:route DELETE /event/{id}/participant/{userID} RemoveParticipant
+	    // Remove the participant userID to this event id
+	    //     Responses:
+	    //       default: Unknown
+					  	//TODO: trouver autre chose : struct?
+	    //       200: EventUser
+			//	     403: 403
+	    //       406: 406
 	Route{"RemoveParticipant", "DELETE", "/event/{id}/participant/{userID}", RemoveParticipantController},
 
+
 	//POSTS
+	// swagger:route GET /post/{id} GetPost
+	    // Get the post matching the given id
+	    //     Responses:
+	    //       default: Unknown
+	    //       200: Event
+			//	     403: 403
+	    //       406: 406
 	Route{"GetPost", "GET", "/post/{id}", GetPostController},
 	Route{"GetLastestPost", "GET", "/post", GetLastestPostsController},
 	Route{"LikePost", "POST", "/post/{id}/like/{userID}", LikePostController},
@@ -123,11 +176,51 @@ var userRoutes = Routes{
 	Route{"UncommentPost", "DELETE", "/post/{id}/comment/{commentID}", UncommentPostController},
 	Route{"ReportComment", "PUT", "/report/{id}/comment/{commentID}", ReportCommentController},
 
-	//USER
+
+	// USER
+	// swagger:route GET /user/{id} GetUser
+	    // Return the user associated with the given id in the URL
+	    //     Responses:
+	    //       default: Unknown
+	    //       200: User
+			//	     403: 403
+	    //       406: 406
 	Route{"GetUser", "GET", "/user/{id}", GetUserController},
+
+	// swagger:route PUT /user/{id} UpdateUser
+	    // Update the user from the JSON body and return the modified user
+	    //     Responses:
+	    //       default: Unknown
+	    //       200: User
+			//	     403: 403
+	    //       406: 406
 	Route{"UpdateUser", "PUT", "/user/{id}", UpdateUserController},
+
+	// swagger:route DELETE /user/{id} DeleteUser
+	    // Delete the given user and answer an empty user if success
+	    //     Responses:
+	    //       default: Unknown
+	    //       200: 200
+			//	     403: 403
+	    //       406: 406
 	Route{"DeleteUser", "DELETE", "/user/{id}", DeleteUserController},
+
+	// swagger:route PUT /search/users/{username} SearchUser
+	    // Return the user(s) matching the entry (username)
+	    //     Responses:
+	    //       default: Unknown
+	    //       200: 200
+			//	     403: 403
+	    //       406: 406
 	Route{"SearchUser", "GET", "/search/users/{username}", SearchUserController},
+
+	// swagger:route PUT /report/user/{id} ReportUser
+	    // Report a user. Return empty JSON
+	    //     Responses:
+	    //       default: Unknown
+	    //       200: Empty
+			//	     403: 403
+	    //       406: 406
 	Route{"ReportUser", "PUT", "/report/user/{id}", ReportUserController},
 
 	//NOTIFICATION

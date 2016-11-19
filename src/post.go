@@ -7,20 +7,40 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-// Post defines how to model a Post
+// Post defines the model of a Post
+// swagger:model
 type Post struct {
+	// id for the Post
+  // required: true
 	ID          bson.ObjectId   `bson:"_id,omitempty"`
+	// title for the Post
+  // required: true
 	Title       string          `json:"title"`
+	// association for the Post
+  // required: true
 	Association bson.ObjectId   `json:"association"`
+	// description for the Post
+  // required: true
 	Description string          `json:"description"`
+	// date for the Post
+  // required: true
 	Date        time.Time       `json:"date"`
+	// likes for the Post
+  // required: true
 	Likes       []bson.ObjectId `json:"likes"`
+	// Comment on the Post
+  // required: true
 	Comments    Comments        `json:"comments"`
+	// Image for the Post
+  // required: true
 	Image    		string          `json:"image"`
+	// Image size for the Post
+  // required: true
 	ImageSize		bson.M					`json:"imageSize"`
 }
 
 // Posts is an array of Post
+// swagger:model
 type Posts []Post
 
 
