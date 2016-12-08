@@ -29,7 +29,8 @@ type Events []Event
 
 // GetEvent returns an Event object from the given ID
 func GetEvent(id bson.ObjectId) Event {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("event")
@@ -41,7 +42,8 @@ func GetEvent(id bson.ObjectId) Event {
 // GetFutureEvents returns an array of Event objects
 // that will happen after "NOW"
 func GetFutureEvents() Events {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("event")
@@ -53,7 +55,8 @@ func GetFutureEvents() Events {
 
 // AddEvent will add the Event event to the database
 func AddEvent(event Event) Event {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("event")
@@ -66,7 +69,8 @@ func AddEvent(event Event) Event {
 
 // UpdateEvent will update the Event event in the database
 func UpdateEvent(id bson.ObjectId, event Event) Event {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("event")
@@ -91,7 +95,8 @@ func UpdateEvent(id bson.ObjectId, event Event) Event {
 
 // DeleteEvent will delete the given Event
 func DeleteEvent(event Event) Event {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("event")
@@ -108,7 +113,8 @@ func DeleteEvent(event Event) Event {
 
 // AddParticipant add the given userID to the given eventID as a participant
 func AddParticipant(id bson.ObjectId, userID bson.ObjectId) (Event, User) {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("event")
@@ -125,7 +131,8 @@ func AddParticipant(id bson.ObjectId, userID bson.ObjectId) (Event, User) {
 
 // RemoveParticipant remove the given userID from the given eventID as a participant
 func RemoveParticipant(id bson.ObjectId, userID bson.ObjectId) (Event, User) {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("event")

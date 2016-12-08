@@ -26,7 +26,8 @@ type Posts []Post
 
 // AddPost will add the given post to the database
 func AddPost(post Post) Post {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("post")
@@ -40,7 +41,8 @@ func AddPost(post Post) Post {
 // UpdatePost will update the post linked to the given ID,
 // with the field of the given post, in the database
 func UpdatePost(id bson.ObjectId, post Post) Post {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("post")
@@ -59,7 +61,8 @@ func UpdatePost(id bson.ObjectId, post Post) Post {
 
 // DeletePost will delete the given post from the database
 func DeletePost(post Post) Post {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("post")
@@ -76,7 +79,8 @@ func DeletePost(post Post) Post {
 
 // GetPost will return an Post object from the given ID
 func GetPost(id bson.ObjectId) Post {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("post")
@@ -87,7 +91,8 @@ func GetPost(id bson.ObjectId) Post {
 
 // GetLastestPosts will return an array of the last N Posts
 func GetLastestPosts(number int) Posts {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("post")
@@ -99,7 +104,8 @@ func GetLastestPosts(number int) Posts {
 // LikePostWithUser will add the user to the list of
 // user that liked the post (cf. Likes field)
 func LikePostWithUser(id bson.ObjectId, userID bson.ObjectId) (Post, User) {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("post")
@@ -117,7 +123,8 @@ func LikePostWithUser(id bson.ObjectId, userID bson.ObjectId) (Post, User) {
 // DislikePostWithUser will remove the user to the list of
 // users that liked the post (cf. Likes field)
 func DislikePostWithUser(id bson.ObjectId, userID bson.ObjectId) (Post, User) {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("post")

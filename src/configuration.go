@@ -10,8 +10,9 @@ type Config struct {
 	Email       string      `json:"email"`
 	Password    string      `json:"password"`
 	GoogleKey   string      `json:"googlekey"`
-  Environment string      `json:"env"`
-  Port        string      `json:"port"`
+    Database    string      `json:"database"`
+    Environment string      `json:"env"`
+    Port        string      `json:"port"`
 }
 
 

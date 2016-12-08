@@ -31,7 +31,8 @@ type Tags []Tag
 // CommentPost will add the given comment object to the
 // list of comments of the post linked to the given id
 func CommentPost(id bson.ObjectId, comment Comment) Post {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("post")
@@ -48,7 +49,8 @@ func CommentPost(id bson.ObjectId, comment Comment) Post {
 // UncommentPost will remove the given comment object from the
 // list of comments of the post linked to the given id
 func UncommentPost(id bson.ObjectId, commentID bson.ObjectId) Post {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("post")
@@ -64,7 +66,8 @@ func UncommentPost(id bson.ObjectId, commentID bson.ObjectId) Post {
 }
 
 func ReportComment(id bson.ObjectId, commentID bson.ObjectId, reporterId bson.ObjectId) {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("post")
@@ -121,7 +124,8 @@ func DeleteCommentsForUser(userId bson.ObjectId) {
 }
 
 func DeleteTagsForUser(userId bson.ObjectId) {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("post")

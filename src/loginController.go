@@ -87,7 +87,8 @@ func SignInUserController(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err == nil && len(login.Username) > 0 && len(login.Device) > 0 {
-		session, _ := mgo.Dial("127.0.0.1")
+		conf, _ := Configuration()
+        session, _ := mgo.Dial(conf.Database)
 		defer session.Close()
 		session.SetMode(mgo.Monotonic, true)
 		db := session.DB("insapp").C("user")
@@ -114,7 +115,8 @@ func generateAuthToken() (string){
 }
 
 func DeleteCredentialsForUser(id bson.ObjectId){
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("credentials")
@@ -122,7 +124,8 @@ func DeleteCredentialsForUser(id bson.ObjectId){
 }
 
 func addCredentials(credentials Credentials) (Credentials){
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("credentials")
@@ -136,7 +139,8 @@ func addCredentials(credentials Credentials) (Credentials){
 }
 
 func checkLoginForAssociation(login Login) (bson.ObjectId, bool, error) {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("association_user")
@@ -150,16 +154,16 @@ func checkLoginForAssociation(login Login) (bson.ObjectId, bool, error) {
 
 func verifyTicket(ticket string) (string, error){
 	response, err := http.Get("https://cas.insa-rennes.fr/cas/serviceValidate?service=https%3A%2F%2Finsapp.fr%2F&ticket=" + ticket)
-  if err != nil {
-		return "", errors.New("Impossible de verfifier l'identité")
-  }
-  defer response.Body.Close()
+    if err != nil {
+    	return "", errors.New("Impossible de verfifier l'identité")
+    }
+    defer response.Body.Close()
 
-	htmlData, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		return "", errors.New("Impossible de verfifier l'identité")
-  }
-  xml := string(htmlData)
+    htmlData, err := ioutil.ReadAll(response.Body)
+    if err != nil {
+    	return "", errors.New("Impossible de verfifier l'identité")
+    }
+    xml := string(htmlData)
 	if !strings.Contains(xml, "<cas:authenticationSuccess>") && !strings.Contains(xml, "<cas:user>"){
 		return "", errors.New("Impossible de verfifier l'identité")
 	}
@@ -174,7 +178,8 @@ func verifyTicket(ticket string) (string, error){
 }
 
 func checkLoginForUser(credentials Credentials) (Credentials, error) {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("credentials")

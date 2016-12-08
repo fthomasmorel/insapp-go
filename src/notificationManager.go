@@ -11,7 +11,8 @@ import (
 )
 
 func getiOSUsers(user string) []NotificationUser {
-  session, _ := mgo.Dial("127.0.0.1")
+  conf, _ := Configuration()
+  session, _ := mgo.Dial(conf.Database)
   defer session.Close()
   session.SetMode(mgo.Monotonic, true)
   db := session.DB("insapp").C("notification_user")
@@ -25,7 +26,8 @@ func getiOSUsers(user string) []NotificationUser {
 }
 
 func getAndroidUsers(user string) []NotificationUser {
-  session, _ := mgo.Dial("127.0.0.1")
+  conf, _ := Configuration()
+  session, _ := mgo.Dial(conf.Database)
   defer session.Close()
   session.SetMode(mgo.Monotonic, true)
   db := session.DB("insapp").C("notification_user")
@@ -39,7 +41,8 @@ func getAndroidUsers(user string) []NotificationUser {
 }
 
 func getNotificationUserForUser(user bson.ObjectId) NotificationUser {
-  session, _ := mgo.Dial("127.0.0.1")
+  conf, _ := Configuration()
+  session, _ := mgo.Dial(conf.Database)
   defer session.Close()
   session.SetMode(mgo.Monotonic, true)
   db := session.DB("insapp").C("notification_user")

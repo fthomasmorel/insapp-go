@@ -34,7 +34,8 @@ type Users []User
 
 // AddUser will add the given user from JSON body to the database
 func AddUser(user User) User {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("user")
@@ -48,7 +49,8 @@ func AddUser(user User) User {
 // UpdateUser will update the user link to the given ID,
 // with the field of the given user, in the database
 func UpdateUser(id bson.ObjectId, user User) User {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("user")
@@ -83,7 +85,8 @@ func UpdateUser(id bson.ObjectId, user User) User {
 
 // DeleteUser will delete the given user from the database
 func DeleteUser(user User) User {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("user")
@@ -106,7 +109,8 @@ func DeleteUser(user User) User {
 
 // GetUser will return an User object from the given ID
 func GetAllUser() Users {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("user")
@@ -117,7 +121,8 @@ func GetAllUser() Users {
 
 // GetUser will return an User object from the given ID
 func GetUser(id bson.ObjectId) User {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("user")
@@ -129,7 +134,8 @@ func GetUser(id bson.ObjectId) User {
 // LikePost will add the postID to the list of liked post
 // of the user linked to the given id
 func LikePost(id bson.ObjectId, postID bson.ObjectId) User {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("user")
@@ -146,7 +152,8 @@ func LikePost(id bson.ObjectId, postID bson.ObjectId) User {
 // DislikePost will remove the postID from the list of liked
 // post of the user linked to the given id
 func DislikePost(id bson.ObjectId, postID bson.ObjectId) User {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("user")
@@ -163,7 +170,8 @@ func DislikePost(id bson.ObjectId, postID bson.ObjectId) User {
 // AddEventToUser will add the eventID to the list
 // of the user's event linked to the given id
 func AddEventToUser(id bson.ObjectId, eventID bson.ObjectId) User {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("user")
@@ -180,7 +188,8 @@ func AddEventToUser(id bson.ObjectId, eventID bson.ObjectId) User {
 // RemoveEventFromUser will remove the eventID from the list
 // of the user's event linked to the given id
 func RemoveEventFromUser(id bson.ObjectId, eventID bson.ObjectId) User {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("user")
@@ -195,7 +204,8 @@ func RemoveEventFromUser(id bson.ObjectId, eventID bson.ObjectId) User {
 }
 
 func SearchUser(username string) Users {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("user")
@@ -206,7 +216,8 @@ func SearchUser(username string) Users {
 }
 
 func ReportUser(id bson.ObjectId, reporterID bson.ObjectId) {
-	session, _ := mgo.Dial("127.0.0.1")
+	conf, _ := Configuration()
+    session, _ := mgo.Dial(conf.Database)
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	db := session.DB("insapp").C("user")
