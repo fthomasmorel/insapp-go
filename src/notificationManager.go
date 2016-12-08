@@ -102,56 +102,61 @@ func triggeriOSNotification(notification Notification, users []NotificationUser)
 
 func sendiOSNotificationToDevice(token string, notification Notification, number int, done chan bool) {
 
-  payload := apns.NewPayload()
-  payload.Alert = notification.Message
-  payload.Badge = number
-  payload.Sound = "bingbong.aiff"
+    conf, _ := Configuration()
+    if conf.Environment != "prod" { return }
 
-  pn := apns.NewPushNotification()
-  pn.DeviceToken = token
-  pn.AddPayload(payload)
-  pn.Set("id", notification.ID)
-  pn.Set("type", notification.Type)
-  pn.Set("sender", notification.Sender)
-  pn.Set("content", notification.Content)
-  pn.Set("message", notification.Message)
-  if notification.Type == "tag" {
-    pn.Set("comment", notification.Comment.ID)
-  }
+    payload := apns.NewPayload()
+    payload.Alert = notification.Message
+    payload.Badge = number
+    payload.Sound = "bingbong.aiff"
 
-  config, _ := Configuration()
+    pn := apns.NewPushNotification()
+    pn.DeviceToken = token
+    pn.AddPayload(payload)
+    pn.Set("id", notification.ID)
+    pn.Set("type", notification.Type)
+    pn.Set("sender", notification.Sender)
+    pn.Set("content", notification.Content)
+    pn.Set("message", notification.Message)
+    if notification.Type == "tag" {
+        pn.Set("comment", notification.Comment.ID)
+    }
 
-  if config.Environment == "staging" {
-    client := apns.NewClient("gateway.sandbox.push.apple.com:2195", "InsappDevCert.pem", "InsappDev.pem")
-    client.Send(pn)
-    pn.PayloadString()
-  }else{
-    client := apns.NewClient("gateway.push.apple.com:2195", "InsappProdCert.pem", "InsappProd.pem")
-    client.Send(pn)
-    pn.PayloadString()
-  }
+    config, _ := Configuration()
 
-  done <- true
+    if config.Environment == "staging" {
+        client := apns.NewClient("gateway.sandbox.push.apple.com:2195", "InsappDevCert.pem", "InsappDev.pem")
+        client.Send(pn)
+        pn.PayloadString()
+    }else{
+        client := apns.NewClient("gateway.push.apple.com:2195", "InsappProdCert.pem", "InsappProd.pem")
+        client.Send(pn)
+        pn.PayloadString()
+    }
+
+    done <- true
 }
 
 func sendAndroidNotificationToDevice(token string, notification Notification, number int, done chan bool) {
-  url := "https://android.googleapis.com/gcm/send"
-  notifJson, _ := json.Marshal(notification)
-  var jsonStr = "{\"registration_ids\":[\"" + token + "\"], \"data\":" + string(notifJson) + "}"
-  req, err := http.NewRequest("POST", url, bytes.NewBufferString(jsonStr))
 
-  config, _ := Configuration()
+    config, _ := Configuration()
+    if config.Environment != "prod" { return }
 
-  req.Header.Set("Authorization", "key=" + config.GoogleKey)
-  req.Header.Set("Content-Type", "application/json")
+    url := "https://android.googleapis.com/gcm/send"
+    notifJson, _ := json.Marshal(notification)
+    var jsonStr = "{\"registration_ids\":[\"" + token + "\"], \"data\":" + string(notifJson) + "}"
+    req, _ := http.NewRequest("POST", url, bytes.NewBufferString(jsonStr))
 
-  client := &http.Client{}
-  resp, err := client.Do(req)
-  if err != nil {
-      panic(err)
-  }
-  defer resp.Body.Close()
-  fmt.Println("response Status:", resp.Status)
 
-  done <- true
+
+    req.Header.Set("Authorization", "key=" + config.GoogleKey)
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, _ := client.Do(req)
+
+    defer resp.Body.Close()
+    fmt.Println("response Status:", resp.Status)
+
+    done <- true
 }
