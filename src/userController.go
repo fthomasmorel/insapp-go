@@ -13,7 +13,7 @@ import (
 // @Title GetUserController
 // @Description Return the user associated with the given id in the URL
 // @Accept  json
-// @Param   id     path    int     true        "User ID"
+// @Param   id     path    int     true        "#userid"
 // @Success 200 {object} User
 // @Failure 403 {object} error  "Forbidden access"
 // @Failure 406 {object} error    "Request not accepted"
@@ -44,7 +44,7 @@ func AddUserController(w http.ResponseWriter, r *http.Request) {
 // @Title UpdateUserController
 // @Description Update the user from the JSON body and return the modified user
 // @Accept  json
-// @Param   id 	     path    int     true        "id of the user to update"
+// @Param   id 	     path    int     true        "#userid"
 // @Param   user     body    User     true        "Modification to give to the user"
 // @Success 200 {object} User
 // @Failure 403 {object} error  "Forbidden access"
@@ -75,7 +75,7 @@ func UpdateUserController(w http.ResponseWriter, r *http.Request) {
 // @Title DeleteUserController
 // @Description Delete the given user and answer an empty user if success
 // @Accept  json
-// @Param   id 	     path    int     true        "id of the user to delete"
+// @Param   id 	     path    int     true        "#useridid of the user to delete"
 // @Success 200 {object} User			"Return empty User when success"
 // @Failure 403 {object} error  	"Forbidden access"
 // @Failure 406 {object} error    "Request not accepted"
