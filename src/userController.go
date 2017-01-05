@@ -13,7 +13,8 @@ import (
 // @Title GetUserController
 // @Description Return the user associated with the given id in the URL
 // @Accept  json
-// @Param   id     path    int     true        "#userid"
+// @Param   id    		path    int     true        "#userid"
+// @Param   token     query    string     true        "#insapptoken"
 // @Success 200 {object} User
 // @Failure 403 {object} error  "Forbidden access"
 // @Failure 406 {object} error    "Request not accepted"
@@ -44,8 +45,9 @@ func AddUserController(w http.ResponseWriter, r *http.Request) {
 // @Title UpdateUserController
 // @Description Update the user from the JSON body and return the modified user
 // @Accept  json
-// @Param   id 	     path    int     true        "#userid"
-// @Param   user     body    User     true        "Modification to give to the user"
+// @Param   id 	      path     int        true        "#userid"
+// @Param   token     query    string     true        "#insapptoken"
+// @Param   user      body     User       true        "Modification to give to the user"
 // @Success 200 {object} User
 // @Failure 403 {object} error  "Forbidden access"
 // @Failure 406 {object} error    "Request not accepted"
@@ -75,7 +77,8 @@ func UpdateUserController(w http.ResponseWriter, r *http.Request) {
 // @Title DeleteUserController
 // @Description Delete the given user and answer an empty user if success
 // @Accept  json
-// @Param   id 	     path    int     true        "#useridid of the user to delete"
+// @Param   id 	      path     int        true        "id of the user to delete #userid"
+// @Param   token     query    string     true        "#insapptoken"
 // @Success 200 {object} User			"Return empty User when success"
 // @Failure 403 {object} error  	"Forbidden access"
 // @Failure 406 {object} error    "Request not accepted"
@@ -99,7 +102,8 @@ func DeleteUserController(w http.ResponseWriter, r *http.Request) {
 // @Title SearchUserController
 // @Description Return the user(s) matching the entry (username)
 // @Accept  json
-// @Param   username 	   path    string     true        "username of the user to look for"
+// @Param   username 	   path    string     true        "username of the user to look for #userid"
+// @Param   token        query   string     true        "#insapptoken"
 // @Success 200 {array}  User			"Return the list of User matching"
 // @Failure 403 {object} error  	"Forbidden access"
 // @Failure 406 {object} error    "Request not accepted"
@@ -114,7 +118,8 @@ func SearchUserController(w http.ResponseWriter, r *http.Request) {
 // @Title ReportUserController
 // @Description Report a user. Return empty JSON
 // @Accept  json
-// @Param   id 	 			    path    int     true        "if of the user to report"
+// @Param   id 	 			    path     int        true        "if of the user to report #userid"
+// @Param   token         query    string     true        "#insapptoken"
 // @Success 200 {object}  bson.M		"Empty JSON"
 // @Failure 403 {object}  error   	"Forbidden access"
 // @Failure 406 {object}  error     "Request not accepted"
