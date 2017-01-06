@@ -5,7 +5,7 @@
 // @TermsOfServiceUrl http://google.com/
 // @License BSD
 // @LicenseUrl http://opensource.org/licenses/BSD-2-Clause
-// @BasePath http://host:port/api/
+// @BasePath https://insapp.thomasmorel.io/api/v1
 package main
 
 import (
