@@ -18,7 +18,16 @@ func GetMyAssociationController(w http.ResponseWriter, r *http.Request) {
 
 // GetAssociationController will answer a JSON of the association
 // linked to the given id in the URL
-// TODO : swagger
+// @Title GetAssociationController
+// @Description Return JSON of the association linked to the given id in the URL
+// @Accept  json
+// @Param   id 	 			    path     bson.ObjectId        true        "id of the association"
+// @Param   token         query    string     true        "#insapptoken"
+// @Success 200 {object}  Association		""
+// @Failure 403 {object}  error   	"Access forbidden"
+// @Failure 406 {object}  error     "Request not accepted"
+// @Resource /association
+// @Router /association/{id} [get]
 func GetAssociationController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	assocationID := vars["id"]
@@ -27,7 +36,15 @@ func GetAssociationController(w http.ResponseWriter, r *http.Request) {
 }
 
 // GetAllAssociationsController will answer a JSON of all associations
-// TODO : swagger
+// @Title GetAllAssociationsController
+// @Description Return JSON of all the associations
+// @Accept  json
+// @Param   token         query    string     true        "#insapptoken"
+// @Success 200 {array}   Association		""
+// @Failure 403 {object}  error   	"Access forbidden"
+// @Failure 406 {object}  error     "Request not accepted"
+// @Resource /association
+// @Router /association [get]
 func GetAllAssociationsController(w http.ResponseWriter, r *http.Request) {
 	var res = GetAllAssociation()
 	json.NewEncoder(w).Encode(res)

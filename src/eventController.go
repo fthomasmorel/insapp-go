@@ -12,7 +12,16 @@ import (
 
 // GetEventController will answer a JSON of the event
 // from the given "id" in the URL. (cf Routes in routes.go)
-// TODO : swagger
+// @Title GetEventController
+// @Description Return JSON of the event linked to the association's id in the URL
+// @Accept  json
+// @Param   id 	 			    path      bson.ObjectId        true        "id of the association"
+// @Param   token         query     string     true        "#insapptoken"
+// @Success 200 {object}  Event	    ""
+// @Failure 403 {object}  error   	"Access forbidden"
+// @Failure 406 {object}  error     "Request not accepted"
+// @Resource /event
+// @Router /event/{id} [get]
 func GetEventController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	assocationID := vars["id"]
@@ -22,7 +31,15 @@ func GetEventController(w http.ResponseWriter, r *http.Request) {
 
 // GetFutureEventsController will answer a JSON
 // containing all future events from "NOW"
-// TODO : swagger
+// @Title GetFutureEventsController
+// @Description Return JSON of all future events from "NOW"
+// @Accept  json
+// @Param   token         query    string     true        "#insapptoken"
+// @Success 200 {array}   Event	   ""
+// @Failure 403 {object}  error   	"Access forbidden"
+// @Failure 406 {object}  error     "Request not accepted"
+// @Resource /event
+// @Router /event [get]
 func GetFutureEventsController(w http.ResponseWriter, r *http.Request) {
 	var res = GetFutureEvents()
 	json.NewEncoder(w).Encode(res)
@@ -87,7 +104,17 @@ func DeleteEventController(w http.ResponseWriter, r *http.Request) {
 
 // AddParticipantController will answer the JSON
 // of the event with the given partipant added
-// TODO : swagger
+// @Title AddParticipantController
+// @Description Add the participant userID to this event id
+// @Accept  json
+// @Param   id 	 			    path     bson.ObjectId        true        "id of the event"
+// @Param   userID 	 			path     bson.ObjectId        true        "id of the user"
+// @Param   token         query    string     true        "#insapptoken"
+// @Success 200 {object}  bson.M		""
+// @Failure 403 {object}  error   	"Access forbidden"
+// @Failure 406 {object}  error     "Request not accepted"
+// @Resource /event
+// @Router /event/{id}/participant/{userID} [post]
 func AddParticipantController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	eventID := bson.ObjectIdHex(vars["id"])
@@ -104,7 +131,17 @@ func AddParticipantController(w http.ResponseWriter, r *http.Request) {
 
 // RemoveParticipantController will answer the JSON
 // of the event without the given partipant added
-// TODO : swagger
+// @Title RemoveParticipantController
+// @Description Remove the participant userID to this event id
+// @Accept  json
+// @Param   id 	 			    path     bson.ObjectId        true        "id of the event"
+// @Param   userID 	 			path     bson.ObjectId        true        "id of the user"
+// @Param   token         query    string     true        "#insapptoken"
+// @Success 200 {object}  bson.M		""
+// @Failure 403 {object}  error   	"Access forbidden"
+// @Failure 406 {object}  error     "Request not accepted"
+// @Resource /event
+// @Router /event/{id}/participant/{userID} [delete]
 func RemoveParticipantController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	eventID := bson.ObjectIdHex(vars["id"])

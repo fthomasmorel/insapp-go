@@ -132,6 +132,7 @@ var userRoutes = Routes{
 			//	     403: 403
 	    //       406: 406
 	Route{"GetFutureEvents", "GET", "/event", GetFutureEventsController},
+
 	// swagger:route GET /event/{id} GetEvent
 	    // Get the event matching the given id
 	    //     Responses:
@@ -140,20 +141,20 @@ var userRoutes = Routes{
 			//	     403: 403
 	    //       406: 406
 	Route{"GetEvent", "GET", "/event/{id}", GetEventController},
+
 	// swagger:route POST /event/{id}/participant/{userID} AddParticipant
 	    // Add the participant userID to this event id
 	    //     Responses:
 	    //       default: Unknown
-							//TODO: trouver autre chose : struct?
 	    //       200: EventUser
 			//	     403: 403
 	    //       406: 406
 	Route{"AddParticipant", "POST", "/event/{id}/participant/{userID}", AddParticipantController},
+
 	// swagger:route DELETE /event/{id}/participant/{userID} RemoveParticipant
 	    // Remove the participant userID to this event id
 	    //     Responses:
 	    //       default: Unknown
-					  	//TODO: trouver autre chose : struct?
 	    //       200: EventUser
 			//	     403: 403
 	    //       406: 406

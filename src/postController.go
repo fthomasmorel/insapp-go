@@ -14,7 +14,16 @@ import (
 
 // GetPostController will answer a JSON of the post
 // linked to the given id in the URL
-// TODO : swagger
+// @Title GetPostController
+// @Description Get the post matching the given id
+// @Accept  json
+// @Param   id 	 			    path     bson.ObjectId        true        "id of the post"
+// @Param   token         query    string     true        "#insapptoken"
+// @Success 200 {object}  Post		 ""
+// @Failure 403 {object}  error   	"Access forbidden"
+// @Failure 406 {object}  error     "Request not accepted"
+// @Resource /post
+// @Router /post/{id} [get]
 func GetPostController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	postID := vars["id"]
@@ -24,7 +33,15 @@ func GetPostController(w http.ResponseWriter, r *http.Request) {
 
 // GetLastestPostsController will answer a JSON of the
 // N lastest post. Here N = 50.
-// TODO : swagger
+// @Title GetLastestPostsController
+// @Description Get the N lastest post.
+// @Accept  json
+// @Param   token         query    string     true        "#insapptoken"
+// @Success 200 {array}  Post		 ""
+// @Failure 403 {object}  error   	"Access forbidden"
+// @Failure 406 {object}  error     "Request not accepted"
+// @Resource /post
+// @Router /post [get]
 func GetLastestPostsController(w http.ResponseWriter, r *http.Request) {
 	var res = GetLastestPosts(50)
 	json.NewEncoder(w).Encode(res)
@@ -90,7 +107,17 @@ func DeletePostController(w http.ResponseWriter, r *http.Request) {
 
 // LikePostController will answer a JSON of the
 // post and the user that liked the post
-// TODO : swagger
+// @Title LikePostController
+// @Description Return JSON with the post and the user that liked the post
+// @Accept  json
+// @Param   id 	 			    path     bson.ObjectId        true        "id of the post"
+// @Param   userID 	 		  path     bson.ObjectId        true        "id of the user"
+// @Param   token         query    string     true        "#insapptoken"
+// @Success 200 {object}   bson.M		 ""
+// @Failure 403 {object}  error   	"Access forbidden"
+// @Failure 406 {object}  error     "Request not accepted"
+// @Resource /post
+// @Router /post/{id}/like/{userID} [post]
 func LikePostController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	postID := vars["id"]
@@ -107,7 +134,17 @@ func LikePostController(w http.ResponseWriter, r *http.Request) {
 
 // DislikePostController will answer a JSON of the
 // post and the user that disliked the post
-// TODO : swagger
+// @Title DislikePostController
+// @Description Return JSON with the post and the user that disliked the post
+// @Accept  json
+// @Param   id 	 			    path     bson.ObjectId        true        "id of the post"
+// @Param   userID 	 		  path     bson.ObjectId        true        "id of the user"
+// @Param   token         query    string     true        "#insapptoken"
+// @Success 200 {object}  bson.M		 ""
+// @Failure 403 {object}  error   	"Access forbidden"
+// @Failure 406 {object}  error     "Request not accepted"
+// @Resource /post
+// @Router /post/{id}/like/{userID} [delete]
 func DislikePostController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	postID := vars["id"]
@@ -123,7 +160,16 @@ func DislikePostController(w http.ResponseWriter, r *http.Request) {
 }
 
 // CommentPostController will answer a JSON of the post
-// TODO : swagger
+// @Title CommentPostController
+// @Description Return JSON of the post that has been commented
+// @Accept  json
+// @Param   id 	 			    path     bson.ObjectId        true        "id of the post"
+// @Param   token         query    string     true        "#insapptoken"
+// @Success 200 {object}  Post		 ""
+// @Failure 403 {object}  error    "Access forbidden"
+// @Failure 406 {object}  error    "Request not accepted"
+// @Resource /post
+// @Router /post/{id}/comment [post]
 func CommentPostController(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -157,7 +203,17 @@ func CommentPostController(w http.ResponseWriter, r *http.Request) {
 }
 
 // UncommentPostController will answer a JSON of the post
-// TODO : swagger
+// @Title UncommentPostController
+// @Description Return JSON of the post that has been uncommented
+// @Accept  json
+// @Param   id 	 			    path     bson.ObjectId        true        "id of the post"
+// @Param   commentID 	  path     bson.ObjectId        true        "id of the comment"
+// @Param   token         query    string     true        "#insapptoken"
+// @Success 200 {object}  Post		 ""
+// @Failure 403 {object}  error    "Access forbidden"
+// @Failure 406 {object}  error    "Request not accepted"
+// @Resource /post
+// @Router /post/{id}/comment/{commentID} [delete]
 func UncommentPostController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	postID := vars["id"]
@@ -180,7 +236,17 @@ func UncommentPostController(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(res)
 }
 
-// TODO : swagger
+// @Title ReportCommentController
+// @Description Report a comment
+// @Accept  json
+// @Param   id 	 			path     bson.ObjectId        true        "id of the post"
+// @Param   commentID 	  path     bson.ObjectId        true        "id of the comment"
+// @Param   token         query    string     true        "#insapptoken"
+// @Success 200 {object}  bson.M	 ""
+// @Failure 403 {object}  error    "Access forbidden"
+// @Failure 406 {object}  error    "Request not accepted"
+// @Resource /report
+// @Router /report/{id}/comment/{commentID} [put]
 func ReportCommentController(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	postID := vars["id"]

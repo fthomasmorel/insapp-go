@@ -30,7 +30,7 @@ type Event struct {
 	Status       	string          `json:"status"`
 	// palette for the event
   // required: true
-	Palette			 	[][]int				 	`json:"palette"`
+	Palette			 	[]Ints				 	`json:"palette"`
 	// selectedcolor for the event
   // required: true
 	SelectedColor int						 	`json:"selectedcolor"`

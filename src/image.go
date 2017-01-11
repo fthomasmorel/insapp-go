@@ -48,8 +48,8 @@ func GetImageDimension(fileName string) (int, int) {
     return image.Width, image.Height
 }
 
-func GetImageColors(fileName string) [][]int {
-  var result [][]int
+func GetImageColors(fileName string) []Ints {
+  var result []Ints
 
   bytes, err := exec.Command("python", "color-thief.py", "./img/" + fileName).Output()
 

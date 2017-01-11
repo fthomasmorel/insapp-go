@@ -29,7 +29,7 @@ type Association struct {
 	Posts       []bson.ObjectId `json:"posts"`
 	// palette of colors to be chosen for the association
 	// required: true
-	Palette			[][]int					`json:"palette"`
+	Palette			[]Ints					`json:"palette"`
 	// selectedcolor for the association
 	// required: true
 	SelectedColor int						`json:"selectedcolor"`
@@ -50,6 +50,10 @@ type Association struct {
 // Associations is an array of Association
 // swagger:model
 type Associations []Association
+
+// Ints is an array of in
+// swagger:model
+type Ints []int
 
 func AddAssociationUser(user AssociationUser) {
 	session, _ := mgo.Dial("127.0.0.1")
